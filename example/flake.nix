@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nightvim.url = "github:cfcosta/nightvim.nix";
+    nightvim.url = "github:cfcosta/nightvim";
 
     cmp-buffer.url = "github:hrsh7th/cmp-buffer";
     cmp-cmdline.url = "github:hrsh7th/cmp-cmdline";
