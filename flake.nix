@@ -11,7 +11,7 @@
     };
   };
 
-  outputs = {
+  outputs = { self, nixpkgs, flake-utils, home-manager }: {
     hmModule = { options, config, lib, pkgs, ... }:
       let cfg = config.programs.nightvim;
       in {
@@ -54,11 +54,10 @@
           };
         };
 
-        config = with nightvim;
-          lib.mkIf cfg.enable {
-            programs.neovim.enable = true;
-            # TODO: Implement things :D
-          };
+        config = lib.mkIf cfg.enable {
+          programs.neovim.enable = true;
+          # TODO: Implement things :D
+        };
       };
   };
 }

@@ -44,7 +44,7 @@
     trouble.url = "github:folke/trouble.nvim";
   };
 
-  config = { nightvim, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, nightvim, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -76,14 +76,16 @@
                 n."<leader>wo" = "<cmd>only<cr>";
               };
 
-              plugins = [
-                (mkPlugin tokyonight {
+              plugins = with inputs; [
+                ({
+                  source = tokyonight;
                   lazy = false;
                   config = ''
                     vim.cmd [[colorscheme tokyonight]]
                   '';
                 })
-                (mkPlugin codegpt {
+                ({
+                  source = codegpt;
                   dependencies = [ nui plenary ];
                   commands = [ "Chat" ];
                   config = ''
@@ -92,9 +94,10 @@
                     end
                   '';
                 })
-                (mkPlugin comment { })
-                (mkPlugin gitsigns { })
-                (mkPlugin mason {
+                ({ source = comment; })
+                ({ source = gitsigns; })
+                ({
+                  source = mason;
                   dependencies = [
                     nvim-dap
                     nvim-lspconfig
