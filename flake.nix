@@ -23,10 +23,17 @@
         config = lib.mkIf cfg.enable {
           programs.neovim.enable = true;
 
-          xdg.configFile."nightvim/init.lua" = {
-            source = ''
-              print("TODO: Implement me")
-            '';
+          xdg.configFile = builtins.attrsets.mapAttrsToList (dir: value: {
+            "${"nightvim/plugins/" + dir}" = { source = value; };
+          }) (builtins.listToAttrs (builtins.map (dir: {
+            name = dir;
+            value = dir;
+          }) cfg.plugins)) // {
+            "nightvim/init.lua" = {
+              source = ''
+                print("TODO: Implement me")
+              '';
+            };
           };
         };
       };
