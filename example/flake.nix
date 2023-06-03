@@ -134,40 +134,50 @@
 
   outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, nightvim, ... }:
     let
-      system = "aarch64-darwin";
+      system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      vimConfig = { options, config, lib, pkgs }: {
+      vimConfig = { options, config, lib, pkgs, ... }: {
         imports = [ nightvim.hmModule ];
+
         programs.nightvim = {
+          enable = true;
           plugins = with inputs; [
-            cmp-buffer
-            cmp-cmdline
-            cmp-nvim-lsp
-            cmp-path
-            cmp-snippy
-            codegpt
-            comment
-            diffview
-            gitsigns
-            neo-tree
-            neogit
-            neorg
-            nui
-            null-ls
-            nvim-autopairs
-            nvim-cmp
-            nvim-dap
-            nvim-lspconfig
-            nvim-snippy
-            nvim-surround
-            nvim-treesitter-endwise
-            nvim-treesitter
-            plenary
-            rust-tools
+            (nightvim.lib.mkPlugin "cmp-buffer" cmp-buffer)
+            (nightvim.lib.mkPlugin "cmp-cmdline" cmp-cmdline)
+            (nightvim.lib.mkPlugin "cmp-nvim-lsp" cmp-nvim-lsp)
+            (nightvim.lib.mkPlugin "cmp-path" cmp-path)
+            (nightvim.lib.mkPlugin "cmp-snippy" cmp-snippy)
+            (nightvim.lib.mkPlugin "codegpt" codegpt)
+            (nightvim.lib.mkPlugin "comment" comment)
+            (nightvim.lib.mkPlugin "diffview" diffview)
+            (nightvim.lib.mkPlugin "gitsigns" gitsigns)
+            (nightvim.lib.mkPlugin "neo-tree" neo-tree)
+            (nightvim.lib.mkPlugin "neogit" neogit)
+            (nightvim.lib.mkPlugin "neorg" neorg)
+            (nightvim.lib.mkPlugin "nui" nui)
+            (nightvim.lib.mkPlugin "null-ls" null-ls)
+            (nightvim.lib.mkPlugin "nvim-autopairs" nvim-autopairs)
+            (nightvim.lib.mkPlugin "nvim-cmp" nvim-cmp)
+            (nightvim.lib.mkPlugin "nvim-dap" nvim-dap)
+            (nightvim.lib.mkPlugin "nvim-lspconfig" nvim-lspconfig)
+            (nightvim.lib.mkPlugin "nvim-snippy" nvim-snippy)
+            (nightvim.lib.mkPlugin "nvim-surround" nvim-surround)
+            (nightvim.lib.mkPlugin "nvim-treesitter-endwise"
+              nvim-treesitter-endwise)
+            (nightvim.lib.mkPlugin "nvim-treesitter" nvim-treesitter)
+            (nightvim.lib.mkPlugin "plenary" plenary)
+            (nightvim.lib.mkPlugin "rust-tools" rust-tools)
           ];
         };
+
+        home.username = "nightvim";
+        home.homeDirectory =
+          if pkgs.stdenv.isLinux then "/home/nightvim" else "/Users/nightvim";
+
+        home.stateVersion = "23.05";
       };
-    in {
+    in
+    {
       result = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ vimConfig ];

@@ -1,3 +1,6 @@
+*/.direnv
+*/result
+*/result-bin
 /.direnv
 /result
 /result-bin

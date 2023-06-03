@@ -12,29 +12,26 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, home-manager }: {
+    lib.mkPlugin = name: dir: { inherit name dir; };
     hmModule = { options, config, lib, pkgs, ... }:
       let cfg = config.programs.nightvim;
-      in {
+      in
+      {
         options.programs.nightvim = with lib; {
           enable = mkEnableOption "NightVim";
-          plugins = mkOption { type = types.listOf types.any; };
+          plugins = mkOption { type = types.listOf types.attrs; };
         };
 
         config = lib.mkIf cfg.enable {
           programs.neovim.enable = true;
 
-          xdg.configFile = builtins.attrsets.mapAttrsToList (dir: value: {
-            "${"nightvim/plugins/" + dir}" = { source = value; };
-          }) (builtins.listToAttrs (builtins.map (dir: {
-            name = dir;
-            value = dir;
-          }) cfg.plugins)) // {
-            "nightvim/init.lua" = {
-              source = ''
-                print("TODO: Implement me")
-              '';
-            };
-          };
+          xdg.configFile = lib.foldl'
+            (acc: attr:
+              acc // {
+                "nightvim/plug/${attr.name}".source = attr.dir;
+              })
+            { }
+            cfg.plugins;
         };
       };
   };
