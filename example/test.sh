@@ -13,4 +13,4 @@ NIX="nix \
 ${NIX} flake lock --update-input nightvim
 ${NIX} build
 
-XDG_CONFIG_HOME="${ROOT}/result/home-files/.config" nvim
+XDG_CONFIG_HOME="${ROOT}/result/home-files/.config" "${ROOT}/result/home-path/bin/nvim" "$@"
