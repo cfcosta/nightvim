@@ -54,9 +54,9 @@
             mapSpec = p: ''
               NightVim.setup_plugin(
                 "${p.name}",
-                "${builtins.toJSON p.depends}",
+                "${builtins.concatStringsSep "," p.depends}",
                 function()
-                  ${builtins.toJSON p.config}
+                  ${builtins.concatStringsSep "\n" p.config}
                 end
               )'';
           in (lib.mkIf cfg.enable {
