@@ -304,6 +304,8 @@
             })
             (nightvim.lib.mkPlugin "toggleterm" toggleterm { })
             (nightvim.lib.mkPlugin "telescope" telescope {
+              inputs = with pkgs; [ ripgrep ];
+
               config = ''
                 local options = {
                   defaults = {
@@ -372,7 +374,7 @@
             (nightvim.lib.mkPlugin "nvim-treesitter" nvim-treesitter {
               depends = [ "nvim-treesitter-endwise" ];
 
-              inputs = [ pkgs.vimPlugins.nvim-treesitter.withAllGrammars ];
+              inputs = with pkgs; [ gcc git ];
 
               config = ''
                 local parser_install_dir = vim.fn.stdpath("cache") .. "/treesitters"

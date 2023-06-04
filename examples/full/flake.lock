@@ -280,11 +280,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685904264,
-        "narHash": "sha256-rMI2lwioj1R5xbEVA/G38j6utRlcia5Q4Yc/uKD7bkU=",
+        "lastModified": 1685904406,
+        "narHash": "sha256-8NBodYZxW25gY1c/skosUFNtXnp235fAvIIb6kp7/3I=",
         "owner": "cfcosta",
         "repo": "nightvim",
-        "rev": "55ecf1a6e89b1a7f7e1f1d26fe2633800fa9a8bf",
+        "rev": "6e01ba0f64937fa399076edb08473d8bd2289e8a",
         "type": "github"
       },
       "original": {
