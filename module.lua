@@ -1,9 +1,9 @@
 local NightVim = {}
 
-NightVim.root = vim.fn.stdpath "config" .. "/night";
-NightVim.plugins_root = vim.fn.stdpath "config" .. "/night/plugins";
+NightVim.root = vim.fn.stdpath("config") .. "/night"
+NightVim.plugins_root = vim.fn.stdpath("config") .. "/night/plugins"
 
-NightVim.map = function (mode, lhs, rhs, opts)
+NightVim.map = function(mode, lhs, rhs, opts)
   local options = { noremap = true }
   if opts then
     options = vim.tbl_extend("force", options, opts)
@@ -13,8 +13,8 @@ end
 
 vim.opt.packpath:prepend(NightVim.plugins_root)
 
-NightVim.setup_plugin = function(name, depends, config)
-end
+NightVim.setup_plugin = function(name, depends, config) end
 
-NightVim.finish = function()
-end
+NightVim.after = function(name, func) end
+
+NightVim.finish = function() end

@@ -61,9 +61,9 @@
                 ${builtins.concatStringsSep "\n"
                 (builtins.map mapSpec cfg.plugins)}
 
-                NightVim.finish()
+                ${cfg.extraConfig}
 
-                ${cfg.extraConfig}'';
+                NightVim.finish()'';
             };
           });
         };
