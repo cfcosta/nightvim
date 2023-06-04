@@ -56,7 +56,10 @@
             mapSpec = p: ''
               NightVim.setup_plugin(
                 "${p.name}",
-                "${builtins.concatStringsSep "," p.depends}",
+                { ${
+                  builtins.concatStringsSep " , "
+                  (builtins.map (d: ''"${d}"'') p.depends)
+                } },
                 function()
                   ${builtins.concatStringsSep "\n" p.config}
                 end
