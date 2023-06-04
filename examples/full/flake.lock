@@ -221,6 +221,22 @@
         "type": "github"
       }
     },
+    "neo-tree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1684546521,
+        "narHash": "sha256-lsqONdSgloKgty0UN61+oIhKxzmI1m8Jxw64W0sLGyY=",
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "rev": "8c89efb93b8383666a6f989762c2f610f5f2c930",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "type": "github"
+      }
+    },
     "neogit": {
       "flake": false,
       "locked": {
@@ -253,22 +269,6 @@
         "type": "github"
       }
     },
-    "neotree": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1684546521,
-        "narHash": "sha256-lsqONdSgloKgty0UN61+oIhKxzmI1m8Jxw64W0sLGyY=",
-        "owner": "nvim-neo-tree",
-        "repo": "neo-tree.nvim",
-        "rev": "8c89efb93b8383666a6f989762c2f610f5f2c930",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-neo-tree",
-        "repo": "neo-tree.nvim",
-        "type": "github"
-      }
-    },
     "nightvim": {
       "inputs": {
         "flake-utils": [
@@ -280,11 +280,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685904406,
-        "narHash": "sha256-8NBodYZxW25gY1c/skosUFNtXnp235fAvIIb6kp7/3I=",
+        "lastModified": 1685904668,
+        "narHash": "sha256-yQn7zaUIawgcoM0FlUod7V435WUu2Dto8Xmg7ajhd38=",
         "owner": "cfcosta",
         "repo": "nightvim",
-        "rev": "6e01ba0f64937fa399076edb08473d8bd2289e8a",
+        "rev": "11166ac01a5f7e012b50c4c857ab1d1f6d89773d",
         "type": "github"
       },
       "original": {
@@ -515,9 +515,9 @@
         "gitsigns": "gitsigns",
         "home-manager": "home-manager",
         "lualine": "lualine",
+        "neo-tree": "neo-tree",
         "neogit": "neogit",
         "neorg": "neorg",
-        "neotree": "neotree",
         "nightvim": "nightvim",
         "nixpkgs": "nixpkgs",
         "nui": "nui",

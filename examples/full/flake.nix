@@ -54,7 +54,7 @@
       url = "github:lewis6991/gitsigns.nvim";
       flake = false;
     };
-    neotree = {
+    neo-tree = {
       url = "github:nvim-neo-tree/neo-tree.nvim";
       flake = false;
     };
@@ -169,7 +169,7 @@
             })
             (nightvim.lib.mkPlugin "diffview" diffview { })
             (nightvim.lib.mkPlugin "gitsigns" gitsigns { })
-            (nightvim.lib.mkPlugin "neotree" neotree {
+            (nightvim.lib.mkPlugin "neo-tree" neo-tree {
               depends = [ "plenary" "nvim-web-devicons" "nui" ];
               config = ''
                 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
@@ -187,7 +187,24 @@
                 }
               '';
             })
-            (nightvim.lib.mkPlugin "neorg" neorg { })
+            (nightvim.lib.mkPlugin "neorg" neorg {
+              config = ''
+                require("neorg").setup {
+                  load = {
+                    ["core.defaults"] = {},
+                    ["core.concealer"] = {},
+                    ["core.dirman"] = {
+                      config = {
+                        workspaces = {
+                          notes = "~/Notes",
+                        },
+                        default_workspace = "notes",
+                      },
+                    },
+                  },
+                }
+              '';
+            })
             (nightvim.lib.mkPlugin "nvim-web-devicons" nvim-web-devicons { })
             (nightvim.lib.mkPlugin "nui" nui { config = ""; })
             (nightvim.lib.mkPlugin "null-ls" null-ls {
@@ -288,12 +305,20 @@
             })
             (nightvim.lib.mkPlugin "nvim-dap" nvim-dap { config = ""; })
             (nightvim.lib.mkPlugin "nvim-lspconfig" nvim-lspconfig {
-              config = "";
+              inputs = with pkgs; [ rnix-lsp ];
+
+              config = ''
+                local lspconfig = require('lspconfig')
+
+                lspconfig.rnix.setup {}
+              '';
             })
             (nightvim.lib.mkPlugin "nvim-snippy" nvim-snippy { config = ""; })
             (nightvim.lib.mkPlugin "nvim-surround" nvim-surround { })
             (nightvim.lib.mkPlugin "plenary" plenary { config = ""; })
-            (nightvim.lib.mkPlugin "rust-tools" rust-tools { })
+            (nightvim.lib.mkPlugin "rust-tools" rust-tools {
+              inputs = with pkgs; [ rust-analyzer ];
+            })
             (nightvim.lib.mkPlugin "cmp-buffer" cmp-buffer { config = ""; })
             (nightvim.lib.mkPlugin "cmp-cmdline" cmp-cmdline { config = ""; })
             (nightvim.lib.mkPlugin "cmp-nvim-lsp" cmp-nvim-lsp { config = ""; })
