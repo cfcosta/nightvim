@@ -27,7 +27,15 @@
             enable = mkEnableOption "NightVim";
 
             plugins = mkOption {
-              type = types.listOf types.attrs;
+              type = types.listOf (types.submodule {
+                options = {
+                  name = mkOption { type = types.str; };
+                  dir = mkOption { type = types.path; };
+                  depends = mkOption { type = types.listOf types.str; };
+                  inputs = mkOption { type = types.listOf types.path; };
+                  config = mkOption { type = types.string; };
+                };
+              });
               default = [ ];
             };
 
