@@ -61,7 +61,7 @@
                   (builtins.map (d: ''"${d}"'') p.depends)
                 } },
                 function()
-                  ${builtins.concatStringsSep "\n" p.config}
+                  ${p.config}
                 end
               )'';
           in (lib.mkIf cfg.enable {
