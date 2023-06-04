@@ -205,6 +205,22 @@
         "type": "github"
       }
     },
+    "lualine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683213422,
+        "narHash": "sha256-ltHE8UIquGo07BSlFGM1l3wmTNN43i8kx6QY7Fj2CNo=",
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim",
+        "rev": "05d78e9fd0cdfb4545974a5aa14b1be95a86e9c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lualine",
+        "repo": "lualine.nvim",
+        "type": "github"
+      }
+    },
     "neogit": {
       "flake": false,
       "locked": {
@@ -264,11 +280,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685895713,
-        "narHash": "sha256-ehDAGr2yURoh2oV7SnfVmpAxuYrycSwFjyqWNU57IvE=",
+        "lastModified": 1685896842,
+        "narHash": "sha256-jPA60jBEI766ISDBD2FfnIYRr9y0YS8dt5n090dHMn8=",
         "owner": "cfcosta",
         "repo": "nightvim",
-        "rev": "47929dd7d9001c0504ac06f65c8eec8297aad262",
+        "rev": "3356e1a84df06e1b7f3d10519787a33c6dd3d4a9",
         "type": "github"
       },
       "original": {
@@ -450,6 +466,7 @@
         "flake-utils": "flake-utils",
         "gitsigns": "gitsigns",
         "home-manager": "home-manager",
+        "lualine": "lualine",
         "neogit": "neogit",
         "neorg": "neorg",
         "neotree": "neotree",

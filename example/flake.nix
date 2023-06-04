@@ -122,6 +122,10 @@
       url = "github:folke/trouble.nvim";
       flake = false;
     };
+    lualine = {
+      url = "github:nvim-lualine/lualine.nvim";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, nightvim, ... }:
@@ -342,6 +346,9 @@
                 '';
               })
               (nightvim.lib.mkPlugin "trouble" trouble {
+                depends = [ "nvim-web-devicons" ];
+              })
+              (nightvim.lib.mkPlugin "lualine" lualine {
                 depends = [ "nvim-web-devicons" ];
               })
             ];
