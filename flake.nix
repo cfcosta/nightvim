@@ -54,7 +54,7 @@
                 "nvim/night/plugins/start/${attr.name}".source = attr.dir;
               }) { } cfg.plugins;
             mapSpec = p: ''
-              NightVim.setup_plugin(
+              NV.setup_plugin(
                 "${p.name}",
                 { ${
                   builtins.concatStringsSep " , "
@@ -79,7 +79,7 @@
 
                 ${cfg.extraConfig}
 
-                NightVim.finish()'';
+                NV.finish()'';
             };
           });
         };

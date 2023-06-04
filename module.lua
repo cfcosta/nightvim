@@ -1,9 +1,9 @@
-local NightVim = {}
+local NV = {}
 
-NightVim.root = vim.fn.stdpath("config") .. "/night"
-NightVim.plugins_root = vim.fn.stdpath("config") .. "/night/plugins"
+NV.root = vim.fn.stdpath("config") .. "/night"
+NV.plugins_root = vim.fn.stdpath("config") .. "/night/plugins"
 
-NightVim.map = function(mode, lhs, rhs, opts)
+NV.map = function(mode, lhs, rhs, opts)
 	local options = { noremap = true }
 	if opts then
 		options = vim.tbl_extend("force", options, opts)
@@ -11,22 +11,22 @@ NightVim.map = function(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-vim.opt.packpath:prepend(NightVim.plugins_root)
+vim.opt.packpath:prepend(NV.plugins_root)
 
-NightVim.afterHooks = {}
-NightVim.plugins = {}
+NV.afterHooks = {}
+NV.plugins = {}
 
-NightVim.setup_plugin = function(name, depends, config)
-	NightVim.plugins[name] = { depends = depends, config = config, loaded = false }
+NV.setup_plugin = function(name, depends, config)
+	NV.plugins[name] = { depends = depends, config = config, loaded = false }
 end
 
-NightVim.after = function(name, func)
-	NightVim.afterHooks[name] = func
+NV.after = function(name, func)
+	NV.afterHooks[name] = func
 end
 
-NightVim.finish = function()
+NV.finish = function()
 	local function load_plugin(name)
-		local plugin = NightVim.plugins[name]
+		local plugin = NV.plugins[name]
 
 		if not plugin then
 			error("Plugin " .. name .. " not found, internal bug?")
@@ -34,7 +34,7 @@ NightVim.finish = function()
 
 		if not plugin.loaded then
 			for _, dep_name in ipairs(plugin.depends) do
-				local dep = NightVim.plugins[dep_name]
+				local dep = NV.plugins[dep_name]
 
 				if not dep then
 					error("Dependency " .. dep_name .. " not found")
@@ -45,7 +45,7 @@ NightVim.finish = function()
 
 			plugin.config()
 
-			local hook = NightVim.afterHooks[name]
+			local hook = NV.afterHooks[name]
 
 			if hook then
 				hook()
@@ -56,7 +56,7 @@ NightVim.finish = function()
 	end
 
 	-- Load all the plugins in the correct order
-	for k, _ in pairs(NightVim.plugins) do
+	for k, _ in pairs(NV.plugins) do
 		load_plugin(k)
 	end
 end
