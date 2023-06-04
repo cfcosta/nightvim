@@ -149,7 +149,11 @@
                   end
                 '';
               })
-              (nightvim.lib.mkPlugin "comment" comment { module = "Comment"; })
+              (nightvim.lib.mkPlugin "comment" comment {
+                config = ''
+                  require("Comment").setup {}
+                '';
+              })
               (nightvim.lib.mkPlugin "diffview" diffview { })
               (nightvim.lib.mkPlugin "gitsigns" gitsigns { })
               (nightvim.lib.mkPlugin "neotree" neotree {
