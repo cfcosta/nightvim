@@ -2,7 +2,9 @@
 
 set -e
 
-ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+EXAMPLE="${1:-full}"
+
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)/examples/${EXAMPLE}"
 
 cd "${ROOT}" || exit 1
 
@@ -13,4 +15,4 @@ NIX="nix \
 ${NIX} flake lock --update-input nightvim
 ${NIX} build
 
-XDG_CONFIG_HOME="${ROOT}/result/home-files/.config" "${ROOT}/result/home-path/bin/nvim" "$@"
+XDG_CONFIG_HOME="${ROOT}/result/home-files/.config" "${ROOT}/result/home-path/bin/nvim"
