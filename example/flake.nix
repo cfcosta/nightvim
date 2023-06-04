@@ -98,14 +98,6 @@
       url = "github:kylechui/nvim-surround";
       flake = false;
     };
-    nvim-treesitter-endwise = {
-      url = "github:RRethy/nvim-treesitter-endwise";
-      flake = false;
-    };
-    nvim-treesitter = {
-      url = "github:nvim-treesitter/nvim-treesitter";
-      flake = false;
-    };
     plenary = {
       url = "github:nvim-lua/plenary.nvim";
       flake = false;
@@ -175,7 +167,7 @@
                 '';
               })
               (nightvim.lib.mkPlugin "neorg" neorg { })
-              (nightvim.lib.mkPlugin "nui" nui { })
+              (nightvim.lib.mkPlugin "nui" nui { config = ""; })
               (nightvim.lib.mkPlugin "null-ls" null-ls {
                 depends = [ "plenary" "nvim-lspconfig" ];
 
@@ -243,7 +235,9 @@
                 ];
 
                 config = ''
-                  require("cmp").setup {
+                  local cmp = require("cmp")
+
+                  cmp.setup {
                         snippet = {
                           expand = function(args)
                             require("snippy").expand_snippet(args.body)
@@ -270,38 +264,21 @@
                       }
                 '';
               })
-              (nightvim.lib.mkPlugin "nvim-dap" nvim-dap { })
-              (nightvim.lib.mkPlugin "nvim-lspconfig" nvim-lspconfig { })
-              (nightvim.lib.mkPlugin "nvim-snippy" nvim-snippy { })
-              (nightvim.lib.mkPlugin "nvim-surround" nvim-surround { })
-              (nightvim.lib.mkPlugin "nvim-treesitter-endwise"
-                nvim-treesitter-endwise { })
-              (nightvim.lib.mkPlugin "nvim-treesitter" nvim-treesitter {
-                depends = [ "nvim-treesitter-endwise" ];
-
-                config = ''
-                  require("nvim-treesitter.configs").setup {
-                    ensure_installed = { "rust", "nix" },
-                    sync_install = false,
-                    auto_install = true,
-                    highlight = { enable = true },
-                    endwise = { enable = true },
-                    indent = { enable = true },
-                  }
-
-                  -- Enable folding using treesitter
-                  vim.opt.foldmethod = "expr"
-                  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-                  vim.opt.foldenable = false
-                '';
+              (nightvim.lib.mkPlugin "nvim-dap" nvim-dap { config = ""; })
+              (nightvim.lib.mkPlugin "nvim-lspconfig" nvim-lspconfig {
+                config = "";
               })
-              (nightvim.lib.mkPlugin "plenary" plenary { })
+              (nightvim.lib.mkPlugin "nvim-snippy" nvim-snippy { config = ""; })
+              (nightvim.lib.mkPlugin "nvim-surround" nvim-surround { })
+              (nightvim.lib.mkPlugin "plenary" plenary { config = ""; })
               (nightvim.lib.mkPlugin "rust-tools" rust-tools { })
-              (nightvim.lib.mkPlugin "cmp-buffer" cmp-buffer { })
-              (nightvim.lib.mkPlugin "cmp-cmdline" cmp-cmdline { })
-              (nightvim.lib.mkPlugin "cmp-nvim-lsp" cmp-nvim-lsp { })
-              (nightvim.lib.mkPlugin "cmp-path" cmp-path { })
-              (nightvim.lib.mkPlugin "cmp-snippy" cmp-snippy { })
+              (nightvim.lib.mkPlugin "cmp-buffer" cmp-buffer { config = ""; })
+              (nightvim.lib.mkPlugin "cmp-cmdline" cmp-cmdline { config = ""; })
+              (nightvim.lib.mkPlugin "cmp-nvim-lsp" cmp-nvim-lsp {
+                config = "";
+              })
+              (nightvim.lib.mkPlugin "cmp-path" cmp-path { config = ""; })
+              (nightvim.lib.mkPlugin "cmp-snippy" cmp-snippy { config = ""; })
               (nightvim.lib.mkPlugin "tokyonight" tokyonight {
                 config = "vim.cmd [[colorscheme tokyonight]]";
               })
