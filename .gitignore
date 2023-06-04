@@ -4,3 +4,5 @@
 /.direnv
 /result
 /result-bin
+
+example/flake.lock
