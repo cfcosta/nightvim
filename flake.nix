@@ -14,13 +14,13 @@
   outputs = { self, nixpkgs, flake-utils, home-manager }:
     {
       lib.mkPlugin = name: dir: spec:
-        spec // {
+        {
           inherit name dir;
-          depends = nixpkgs.lib.mkDefault [ ];
-          inputs = nixpkgs.lib.mkDefault [ ];
-          config = nixpkgs.lib.mkDefault ''require("${name}").setup {}'';
-          keys.n = nixpkgs.lib.mkDefault { };
-        };
+          depends = [ ];
+          inputs = [ ];
+          config = ''require("${name}").setup {}'';
+          keys.n = { };
+        } // spec;
       hmModule = { options, config, lib, pkgs, ... }:
         let cfg = config.programs.nightvim;
         in {
