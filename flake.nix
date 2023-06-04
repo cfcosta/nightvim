@@ -48,7 +48,6 @@
           };
 
           config = let
-            pluginNames = builtins.map (p: p.name) cfg.plugins;
             pluginFolders = lib.foldl' (acc: attr:
               acc // {
                 "nvim/night/plugins/start/${attr.name}".source = attr.dir;
