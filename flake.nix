@@ -27,19 +27,20 @@
           options.programs.nightvim = with lib; {
             enable = mkEnableOption "NightVim";
 
-            plugins = mkOption {
-              type = types.listOf (types.submodule {
-                options = {
-                  name = mkOption { type = types.str; };
-                  dir = mkOption { type = types.path; };
-                  depends = mkOption { type = types.listOf types.str; };
-                  inputs = mkOption { type = types.listOf types.path; };
-                  config = mkOption { type = types.str; };
-                  module = mkOption { type = types.str; };
-                };
-              });
-              default = [ ];
-            };
+            plugins = with types;
+              mkOption {
+                type = listOf (submodule {
+                  options = {
+                    name = mkOption { type = str; };
+                    dir = mkOption { type = path; };
+                    depends = mkOption { type = listOf str; };
+                    inputs = mkOption { type = listOf attrs; };
+                    config = mkOption { type = str; };
+                    module = mkOption { type = str; };
+                  };
+                });
+                default = [ ];
+              };
 
             extraConfig = mkOption {
               type = types.str;
@@ -65,6 +66,9 @@
               )'';
           in (lib.mkIf cfg.enable {
             programs.neovim.enable = true;
+
+            home.packages =
+              builtins.foldl' (acc: p: acc ++ p.inputs) [ ] cfg.plugins;
 
             xdg.configFile = pluginFolders // {
               "nvim/init.lua".text = ''
