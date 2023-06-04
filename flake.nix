@@ -19,7 +19,6 @@
           depends = [ ];
           inputs = [ ];
           config = ''require("${name}").setup {}'';
-          keys.n = { };
         } // spec;
       hmModule = { options, config, lib, pkgs, ... }:
         let cfg = config.programs.nightvim;

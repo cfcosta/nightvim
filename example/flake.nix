@@ -162,7 +162,6 @@
                 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
                 require("neo-tree").setup()
               '';
-              keys.n."<leader>op" = "<cmd>Neotree toggle<cr>";
             })
             (nightvim.lib.mkPlugin "neogit" neogit {
               depends = [ "plenary" "diffview" ];
@@ -174,7 +173,6 @@
                   },
                 }
               '';
-              keys.n."<leader>gg" = "<cmd>Neogit<cr>";
             })
             (nightvim.lib.mkPlugin "neorg" neorg { })
             (nightvim.lib.mkPlugin "nui" nui { })
@@ -277,8 +275,7 @@
             (nightvim.lib.mkPlugin "nvim-snippy" nvim-snippy { })
             (nightvim.lib.mkPlugin "nvim-surround" nvim-surround { })
             (nightvim.lib.mkPlugin "nvim-treesitter-endwise"
-              nvim-treesitter-endwise
-              { })
+              nvim-treesitter-endwise { })
             (nightvim.lib.mkPlugin "nvim-treesitter" nvim-treesitter {
               depends = [ "nvim-treesitter-endwise" ];
 
@@ -308,22 +305,8 @@
             (nightvim.lib.mkPlugin "tokyonight" tokyonight {
               config = "vim.cmd [[colorscheme tokyonight]]";
             })
-            (nightvim.lib.mkPlugin "toggleterm" toggleterm {
-              keys.n = {
-                "<leader>ot" = "<cmd>ToggleTerm direction=horizontal<cr>";
-                "<leader>oT" = "<cmd>ToggleTerm direction=vertical<cr>";
-              };
-            })
+            (nightvim.lib.mkPlugin "toggleterm" toggleterm { })
             (nightvim.lib.mkPlugin "telescope" telescope {
-              keys.n = {
-                "<leader><leader>" =
-                  "<cmd> Telescope find_files hidden=true<CR>";
-                "<leader>/" = "<cmd> Telescope live_grep <CR>";
-                "<leader>bb" = "<cmd> Telescope buffers <CR>";
-                "<leader>cm" = "<cmd> Telescope git_commits <CR>";
-                "<leader>gt" = "<cmd> Telescope git_status <CR>";
-              };
-
               config = ''
                 local options = {
                   defaults = {
@@ -383,14 +366,6 @@
             })
             (nightvim.lib.mkPlugin "trouble" trouble {
               depends = [ "nvim-web-devicons" ];
-              keys.n = {
-                "<leader>xx" = "<cmd>TroubleToggle<cr>";
-                "<leader>xw" = "<cmd>TroubleToggle workspace_diagnostics<cr>";
-                "<leader>xd" = "<cmd>TroubleToggle document_diagnostics<cr>";
-                "<leader>xq" = "<cmd>TroubleToggle quicklist<cr>";
-                "<leader>xl" = "<cmd>TroubleToggle loclist<cr>";
-                "gr" = "<cmd>TroubleToggle lsp_references<cr>";
-              };
             })
           ];
         };
@@ -401,8 +376,7 @@
 
         home.stateVersion = "23.05";
       };
-    in
-    {
+    in {
       result = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ vimConfig ];
