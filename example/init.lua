@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 NightVim.map("n", "<leader>wv", "<cmd>vsplit<cr>")
 NightVim.map("n", "<leader>ws", "<cmd>split<cr>")
 NightVim.map("n", "<leader>wc", "<cmd>close<cr>")
