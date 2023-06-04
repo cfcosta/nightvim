@@ -280,11 +280,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685898397,
-        "narHash": "sha256-L1Nb9kiOn1mglexXpyzuUE/PdqPWxaWQSqwBNzJ22n0=",
+        "lastModified": 1685902027,
+        "narHash": "sha256-F8RkDXkl3FHzoF7a4FqNlRtd6WPm/OjgdvpTDcF+FLE=",
         "owner": "cfcosta",
         "repo": "nightvim",
-        "rev": "b06bbd0c2a7e7b2c7a3e1e5571627c1ccd002268",
+        "rev": "9a7157c4cfca89f4086c80e4405c028f69989e3b",
         "type": "github"
       },
       "original": {
@@ -469,6 +469,22 @@
         "type": "github"
       }
     },
+    "nvim-web-devicons": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685150210,
+        "narHash": "sha256-bryHxQZQ75wQXHLqYVh5zSkgLijdPvVAZPDYnv+JTkI=",
+        "owner": "nvim-tree",
+        "repo": "nvim-web-devicons",
+        "rev": "2a125024a137677930efcfdf720f205504c97268",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-tree",
+        "repo": "nvim-web-devicons",
+        "type": "github"
+      }
+    },
     "plenary": {
       "flake": false,
       "locked": {
@@ -514,6 +530,7 @@
         "nvim-surround": "nvim-surround",
         "nvim-treesitter": "nvim-treesitter",
         "nvim-treesitter-endwise": "nvim-treesitter-endwise",
+        "nvim-web-devicons": "nvim-web-devicons",
         "plenary": "plenary",
         "rust-tools": "rust-tools",
         "telescope": "telescope",

@@ -136,6 +136,11 @@
       url = "github:RRethy/nvim-treesitter-endwise";
       flake = false;
     };
+
+    nvim-web-devicons = {
+      url = "github:nvim-tree/nvim-web-devicons";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, flake-utils, home-manager, nightvim, ... }:
@@ -185,6 +190,7 @@
                 '';
               })
               (nightvim.lib.mkPlugin "neorg" neorg { })
+              (nightvim.lib.mkPlugin "nvim-web-devicons" nvim-web-devicons { })
               (nightvim.lib.mkPlugin "nui" nui { config = ""; })
               (nightvim.lib.mkPlugin "null-ls" null-ls {
                 depends = [ "plenary" "nvim-lspconfig" ];
