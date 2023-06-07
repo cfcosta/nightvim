@@ -20,6 +20,7 @@
           inputs = [ ];
           config = ''require("${module}").setup {}'';
           module = name;
+          lazy = true;
         } // spec;
       hmModule = { options, config, lib, pkgs, ... }:
         let cfg = config.programs.nightvim;
@@ -37,6 +38,7 @@
                     inputs = mkOption { type = listOf attrs; };
                     config = mkOption { type = str; };
                     module = mkOption { type = str; };
+                    lazy = mkOption { type = bool; };
                   };
                 });
                 default = [ ];
@@ -53,8 +55,10 @@
               acc // {
                 "nvim/night/plugins/start/${attr.name}".source = attr.dir;
               }) { } cfg.plugins;
+            loadFunc = p:
+              if p.lazy then "_nv_setup_plugin" else "_nv_setup_plugin_eager";
             mapSpec = p: ''
-              _nv_setup_plugin(
+              ${loadFunc p}(
                 "${p.name}",
                 { ${
                   builtins.concatStringsSep " , "
@@ -73,6 +77,8 @@
             xdg.configFile = pluginFolders // {
               "nvim/init.lua".text = ''
                 ${builtins.readFile ./module.lua}
+
+                _nv_init()
 
                 ${builtins.concatStringsSep "\n"
                 (builtins.map mapSpec cfg.plugins)}
