@@ -78,7 +78,14 @@ local function _nv_finish()
 		nv_load_plugin(k)
 	end
 
-	for k, _ in pairs(NV.plugins.lazy) do
-		nv_load_plugin(k)
-	end
+	vim.api.nvim_create_autocmd("User", {
+		event = "VimEnter",
+		pattern = "*",
+		once = true,
+		callback = vim.defer_fn(function()
+			for k, _ in pairs(NV.plugins.lazy) do
+				nv_load_plugin(k)
+			end
+		end),
+	})
 end
