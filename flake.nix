@@ -51,6 +51,14 @@
           };
 
           config = let
+            quoteString = d: ''"${d}"'';
+            listToLua = list: ''
+              {${
+                builtins.concatStringsSep " , " (builtins.map quoteString list)
+              }} 
+            '';
+            attrsToLua = attrs: let pairs = [ ]; in "";
+
             pluginFolders = lib.foldl' (acc: attr:
               acc // {
                 "nvim/night/plugins/start/${attr.name}".source = attr.dir;
@@ -60,10 +68,7 @@
             mapSpec = p: ''
               ${loadFunc p}(
                 "${p.name}",
-                { ${
-                  builtins.concatStringsSep " , "
-                  (builtins.map (d: ''"${d}"'') p.depends)
-                } },
+                ${listToLua p.depends},
                 function()
                   ${p.config}
                 end
