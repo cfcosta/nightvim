@@ -1,13 +1,15 @@
 # NightVim
 
-NightVim is a simple plugin manager solution for [Neovim](https://neovim.io),
-offering a similar interface to [lazy.nvim](https://github.com/folke/lazy.nvim)
-in Nix, and allowing to use flake inputs to manage dependencies, as well as
-some simple boilerplate code to simplify configuration.
+NightVim is a home-manager module to manager plugins for
+[Neovim](https://github.io), offering a similar interface to
+[lazy.nvim](https://github.com/folke/lazy.nvim) in Nix, and allowing to use
+flake inputs to manage dependencies, as well as some simple boilerplate code to
+simplify configuration.
 
 ## Requirements
 
 - Nix
+- Neovim
 
 ## Testing
 
@@ -24,11 +26,16 @@ curl https://raw.githubusercontent.com/cfcosta/nightvim/main/try.sh | bash
 
 ## Project Status
 
-I have migrated my [config](https://github.com/cfcosta/neovim.nix) to it, and
-it works really well.
+I have been using it exclusively on my
+[config](https://github.com/cfcosta/neovim.nix) for more than 3 months without
+any problems, but I can not guarantee that it will work the same for you.
 
-What is missing:
+If you do find any problem, please create an issue, or send a Pull Request. All
+contributions are welcome!
 
-- [ ] Lazy loading
-- [ ] Two way serialization of setup options
-- [ ] LSP/Tree-sitter modules
+## License
+
+NightVim is licensed under the [MIT License](./LICENSE). If you have an
+use-case that is incompatible with this license for any reason, please get in
+touch and I can open an exception, or re-license the software with a different
+one for anyone else in the same situation.
