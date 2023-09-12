@@ -4,5 +4,6 @@
 /.direnv
 /result
 /result-bin
+/.luarc.json
 
 example/flake.lock

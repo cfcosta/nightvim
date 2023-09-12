@@ -6,6 +6,7 @@ local NV = {
 		lazy = {},
 		eager = {},
 	},
+	fts = {},
 }
 
 local function _nv_open_config()
@@ -26,6 +27,10 @@ local function map(mode, lhs, rhs, opts)
 		options = vim.tbl_extend("force", options, opts)
 	end
 	vim.keymap.set(mode, lhs, rhs, options)
+end
+
+local function set_ft(pattern, ft)
+	NV.fts[pattern] = ft
 end
 
 local function _nv_init()
@@ -82,6 +87,16 @@ local function _nv_finish()
 		pattern = "*",
 		once = true,
 		callback = function()
+			for pattern, ft in pairs(NV.fts) do
+				vim.api.nvim_create_autocmd("BufRead,BufNewFile", {
+					pattern = pattern,
+					clear = false,
+					callback = function()
+						vim.cmd("set filetype=" .. ft)
+					end,
+				})
+			end
+
 			for k, _ in pairs(NV.plugins.lazy) do
 				nv_load_plugin(k)
 			end
