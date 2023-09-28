@@ -35,11 +35,12 @@ cd - || exit 1
 mkdir -p "${TEMP}/.local/share"
 mkdir -p "${TEMP}/.cache"
 
+export HOME="${TEMP}"
 export XDG_CONFIG_HOME="${TEMP}/result/home-files/.config"
 export XDG_CACHE_HOME="${TEMP}/.cache"
 export XDG_DATA_HOME="${TEMP}/.local/share"
 export PATH="${TEMP}/result/home-path/bin:${PATH}"
 
-"${TEMP}/result/home-path/bin/nvim"
+"${TEMP}/result/home-path/bin/nvim" $@
 
 cleanup
